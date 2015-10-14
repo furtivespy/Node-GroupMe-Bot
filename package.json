@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "director": "",
+    "giphy": "0.0.4",
     "cool-ascii-faces": "~1.3.x"
   },
   "engines": {

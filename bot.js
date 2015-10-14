@@ -1,6 +1,6 @@
 var HTTPS = require('https');
 var cool = require('cool-ascii-faces');
-
+var giphy = require( 'giphy' )( 'dc6zaTOxFJmzC' );
 var botID = process.env.BOT_ID;
 
 function respond() {
@@ -8,17 +8,24 @@ function respond() {
       botRegex = /^\/cool guy$/,
       giphyBot = "g ";
 
+
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
     postMessage(cool());
     this.res.end();
   } else if (request.text && request.text.trim().toLowerCase().startsWith(giphyBot)){
-    postMessage(request.text.trim().substring(2));
+    giphy.search({ q : request.text.trim().substring(2), limit:1 }, gifResult);
+
   } else {
     console.log("don't care");
     this.res.writeHead(200);
     this.res.end();
   }
+}
+
+function gifResult(err, data, res)
+{
+  postMessage(data.images.original.url);
 }
 
 function postMessage(botResponse) {
