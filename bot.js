@@ -26,7 +26,7 @@ function respond() {
 function gifResult(err, thedata, res)
 {
   if (thedata.data){
-    var i = Math.floor((math.random() * thedata.data.length));
+    var i = Math.floor((Math.random() * thedata.data.length));
     if(thedata.data[i] && thedata.data[i].images && thedata.data[i].images.original){
       postMessage(thedata.data[i].images.original.url);
     }
