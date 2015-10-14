@@ -3,7 +3,7 @@ var gifBot = require('./gifBot.js');
 var coolBot = require('./coolBot.js');
 var botID = process.env.BOT_ID;
 
-var allBots[];
+var allBots = [];
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
