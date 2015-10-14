@@ -7,7 +7,7 @@ exports.respond = function(theRequest, callback){
   if (request.text && request.text.trim().toLowerCase().startsWith('g ')){
     giphy.search({ q : request.text.trim().substring(2), limit:10 }, function (err, thedata, res) {
       processGiphy(err, thedata, res, theRequest, callback);
-    };
+    });
   } else {
     callback(false);
   }
