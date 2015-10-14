@@ -14,7 +14,7 @@ function respond() {
     postMessage(cool());
     this.res.end();
   } else if (request.text && request.text.trim().toLowerCase().startsWith(giphyBot)){
-    giphy.search({ q : request.text.trim().substring(2), limit:1 }, gifResult);
+    giphy.search({ q : request.text.trim().substring(2), limit:10 }, gifResult);
 
   } else {
     console.log("don't care");
@@ -25,7 +25,12 @@ function respond() {
 
 function gifResult(err, thedata, res)
 {
-  postMessage(thedata.data[0].images.original.url);
+  if (thedata.data){
+    var i = Math.floor((math.random() * thedata.data.length));
+    if(thedata.data[i] && thedata.data[i].images && thedata.data[i].images.original){
+      postMessage(thedata.data[i].images.original.url);
+    }
+  }
 }
 
 function postMessage(botResponse) {
