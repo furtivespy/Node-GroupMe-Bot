@@ -5,12 +5,15 @@ var botID = process.env.BOT_ID;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
-      botRegex = /^\/cool guy$/;
+      botRegex = /^\/cool guy$/,
+      giphyBot = "g ";
 
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
-    postMessage();
+    postMessage(cool());
     this.res.end();
+  } else if (request.text && request.text.trim().toLowerCase().startsWith(giphyBot)){
+    postMessage(request.text.trim().substring(2));
   } else {
     console.log("don't care");
     this.res.writeHead(200);
@@ -18,10 +21,10 @@ function respond() {
   }
 }
 
-function postMessage() {
-  var botResponse, options, body, botReq;
+function postMessage(botResponse) {
+  var options, body, botReq;
 
-  botResponse = cool();
+  //botResponse = cool();
 
   options = {
     hostname: 'api.groupme.com',
