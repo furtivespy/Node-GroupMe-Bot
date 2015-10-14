@@ -23,9 +23,9 @@ function respond() {
   }
 }
 
-function gifResult(err, data, res)
+function gifResult(err, thedata, res)
 {
-  postMessage(data.images.original.url);
+  postMessage(thedata.data[0].images.original.url);
 }
 
 function postMessage(botResponse) {
