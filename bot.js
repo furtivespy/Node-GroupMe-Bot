@@ -1,35 +1,29 @@
 var HTTPS = require('https');
-var cool = require('cool-ascii-faces');
-var giphy = require( 'giphy' )( 'dc6zaTOxFJmzC' );
+var gifBot = require('./gifBot.js');
+var coolBot = require('./coolBot.js');
 var botID = process.env.BOT_ID;
 
+var allBots[];
+
 function respond() {
-  var request = JSON.parse(this.req.chunks[0]),
-      botRegex = /^\/cool guy$/,
-      giphyBot = "g ";
+  var request = JSON.parse(this.req.chunks[0]);
 
+  allBots.push(coolBot);
+  allBots.push(gifBot);
 
-  if(request.text && botRegex.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage(cool());
-    this.res.end();
-  } else if (request.text && request.text.trim().toLowerCase().startsWith(giphyBot)){
-    giphy.search({ q : request.text.trim().substring(2), limit:10 }, gifResult);
-
-  } else {
-    console.log("don't care");
-    this.res.writeHead(200);
-    this.res.end();
-  }
+  allBots.each(function() {
+    this.respond(request, botCallback);
+  });
+  this.res.writeHead(200);
 }
 
-function gifResult(err, thedata, res)
-{
-  if (thedata.data){
-    var i = Math.floor((Math.random() * thedata.data.length));
-    if(thedata.data[i] && thedata.data[i].images && thedata.data[i].images.original){
-      postMessage(thedata.data[i].images.original.url);
-    }
+function botCallback(sendMessage, messageData){
+  if(sendMessage) {
+    postMessage(messageData);
+  }
+  allBots.pop();
+  if(allBots.length <= 0){
+    this.res.end();
   }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "Furtivespy-GroupmeBot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A tiny Groupme bot based on a Node.js sample bot",
   "homepage": "https://github.com/furtivespy/Node-GroupMe-Bot",
   "main": "index.js",
