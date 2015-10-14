@@ -11,9 +11,9 @@ function respond() {
   allBots.push(coolBot);
   allBots.push(gifBot);
 
-  allBots.forEach(function(item) {
-    item.respond(request, botCallback);
-  });
+  for (i = 0; i < allBots.length; i++) {
+      allBots[i].respond(request, botCallback);
+  }
   this.res.writeHead(200);
 }
 
@@ -22,8 +22,8 @@ function botCallback(sendMessage, messageData){
     postMessage(messageData);
   }
   allBots.pop();
-  if(allBots.length <= 0){
-    this.res.end();
+  if(allBots.length == 0){
+    this.res.end(); //Done!
   }
 }
 

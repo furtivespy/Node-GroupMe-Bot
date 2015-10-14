@@ -5,6 +5,7 @@ var giphy = require( 'giphy' )( giphyKey );
 
 exports.respond = function(theRequest, callback){
   if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('g ')){
+    console('searching ' + theRequest.text.trim().substring(2));
     giphy.search({ q : theRequest.text.trim().substring(2), limit:10 }, function (err, thedata, res) {
       processGiphy(err, thedata, res, theRequest, callback);
     });
@@ -14,6 +15,7 @@ exports.respond = function(theRequest, callback){
 }
 
 function processGiphy(err, thedata, res, theRequest, callback){
+  console.log('posting...');
   if (thedata.data){
     var i = Math.floor((Math.random() * thedata.data.length));
     if(thedata.data[i] && thedata.data[i].images && thedata.data[i].images.original){
