@@ -11,8 +11,8 @@ function respond() {
   allBots.push(coolBot);
   allBots.push(gifBot);
 
-  allBots.forEach(function() {
-    this.respond(request, botCallback);
+  allBots.forEach(function(item) {
+    item.respond(request, botCallback);
   });
   this.res.writeHead(200);
 }
