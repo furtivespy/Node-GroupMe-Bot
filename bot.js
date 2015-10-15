@@ -11,20 +11,20 @@ function respond() {
   //I want to do this in an array, but not working.
   allBots.push(coolBot);
   allBots.push(gifBot);
-  coolBot.respond(request, botCallback);
-  gifBot.respond(request, botCallback);
-  
+  coolBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
+  gifBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
+
   this.res.writeHead(200);
 }
 
-function botCallback(sendMessage, messageData){
+function botCallback(sendMessage, messageData, res){
   console.log(allBots.length);
   if(sendMessage) {
     postMessage(messageData);
   }
   allBots.pop();
   if(allBots.length == 0){
-    this.res.end(); //Done!
+    res.end(); //Done!
   }
 }
 
