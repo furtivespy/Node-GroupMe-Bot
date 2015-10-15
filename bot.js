@@ -9,20 +9,20 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]);
 
   //I want to do this in an array, but not working.
-  coolBot.respond(request, botCallback);
   allBots.push(coolBot);
-  gifBot.respond(request, botCallback);
   allBots.push(gifBot);
-
+  coolBot.respond(request, botCallback);
+  gifBot.respond(request, botCallback);
+  
   this.res.writeHead(200);
 }
 
 function botCallback(sendMessage, messageData){
+  console.log(allBots.length);
   if(sendMessage) {
     postMessage(messageData);
   }
   allBots.pop();
-  console.log(allBots.length);
   if(allBots.length == 0){
     this.res.end(); //Done!
   }
