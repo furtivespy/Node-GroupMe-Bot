@@ -8,12 +8,12 @@ var allBots = [];
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
 
+  //I want to do this in an array, but not working.
+  coolBot.respond(request, botCallback);
   allBots.push(coolBot);
+  gifBot.respond(request, botCallback);
   allBots.push(gifBot);
 
-  for (i = 0; i < allBots.length; i++) {
-      allBots[i].respond(request, botCallback);
-  }
   this.res.writeHead(200);
 }
 
@@ -22,6 +22,7 @@ function botCallback(sendMessage, messageData){
     postMessage(messageData);
   }
   allBots.pop();
+  console.log(allBots.length);
   if(allBots.length == 0){
     this.res.end(); //Done!
   }
