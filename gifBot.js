@@ -4,8 +4,9 @@ var giphyKey = process.env.GIPHY_KEY;
 var giphy = require( 'giphy' )( giphyKey );
 
 exports.respond = function(theRequest, callback){
+  console.log(giphykey);
   if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('g ')){
-    console('searching ' + theRequest.text.trim().substring(2));
+    console.log('searching ' + theRequest.text.trim().substring(2));
     giphy.search({ q : theRequest.text.trim().substring(2), limit:10 }, function (err, thedata, res) {
       processGiphy(err, thedata, res, theRequest, callback);
     });
