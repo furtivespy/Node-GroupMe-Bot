@@ -1,32 +1,23 @@
 var HTTPS = require('https');
 var gifBot = require('./gifBot.js');
 var coolBot = require('./coolBot.js');
+var yesnoBot = require('./yesnoBot.js');
 var botID = process.env.BOT_ID;
 
-var allBots = [];
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
 
-  //I want to do this in an array, but not working.
-  allBots.push(coolBot);
-  allBots.push(gifBot);
-  this.res.writeHead(200);
+  //I should to do this in an array, but whatever.
+
   coolBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
   gifBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
-
+  yesnoBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
 }
 
 function botCallback(sendMessage, messageData, res){
-  console.log(allBots.length);
   if(sendMessage) {
     postMessage(messageData);
-  }
-  allBots.pop();
-  if(allBots.length == 0){
-    if (res) {
-      res.end(); //Done!
-    }
   }
 }
 
