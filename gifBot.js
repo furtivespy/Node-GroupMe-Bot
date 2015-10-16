@@ -21,13 +21,12 @@ function searchGiphy(theRequest, callback) {
 }
 
 function searchGifMe(theRequest, callback, trim) {
-  request({url: 'http://api.gifme.io/v1/search',
-          qsStringifyOptions: {
+  request({url: 'http://api.gifme.io/v1/search?' + qs.stringify( {
             query: theRequest.text.trim().substring(trim),
             limit: 25,
             page: 0,
             swf: false,
-            key: process.env.GIFME_KEY },
+            key: process.env.GIFME_KEY }),
           json: true },
           function(error, response, body) {
             console.log(body);
