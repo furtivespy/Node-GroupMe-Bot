@@ -1,5 +1,6 @@
 /* A Gif Posting bot */
 var request = require('request');
+var qs = require( 'querystring' );
 var giphy = require( 'giphy' )( process.env.GIPHY_KEY );
 
 exports.respond = function(theRequest, callback){
