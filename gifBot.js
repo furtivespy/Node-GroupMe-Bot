@@ -24,12 +24,13 @@ function searchGifMe(theRequest, callback, trim) {
   request({url: 'http://api.gifme.io/v1/search',
           qsStringifyOptions: {
             query: theRequest.text.trim().substring(trim),
-            limit: 12,
+            limit: 25,
             page: 0,
             swf: false,
             key: process.env.GIFME_KEY },
           json: true },
           function(error, response, body) {
+            console.log(body);
             if (body.data){
               var i = Math.floor((Math.random() * body.data.length));
               if(body.data[i] && body.data[i].link){
