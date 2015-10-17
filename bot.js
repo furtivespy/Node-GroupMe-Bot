@@ -2,6 +2,7 @@ var HTTPS = require('https');
 var gifBot = require('./gifBot.js');
 var coolBot = require('./coolBot.js');
 var yesnoBot = require('./yesnoBot.js');
+var diceBot = require('./diceBot.js');
 var botID = process.env.BOT_ID;
 
 
@@ -13,6 +14,7 @@ function respond() {
   coolBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
   gifBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
   yesnoBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
+  diceBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
 }
 
 function botCallback(sendMessage, messageData, res){

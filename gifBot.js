@@ -8,7 +8,7 @@ exports.respond = function(theRequest, callback){
     console.log('searching ' + theRequest.text.trim().substring(2));
     searchGiphy(theRequest, callback);
   } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('gm ')){
-    console.log('searching ' + theRequest.text.trim().substring(2));
+    console.log('searching ' + theRequest.text.trim().substring(3));
     searchGifMe(theRequest, callback, 3);
   } else{
     callback(false);
@@ -30,7 +30,7 @@ function searchGifMe(theRequest, callback, trim) {
             key: process.env.GIFME_KEY }),
           json: true },
           function(error, response, body) {
-            console.log(body);
+            //console.log(body);
             if (body.data){
               var i = Math.floor((Math.random() * body.data.length));
               if(body.data[i] && body.data[i].link){
@@ -45,7 +45,7 @@ function searchGifMe(theRequest, callback, trim) {
 }
 
 function processGiphy(err, thedata, res, theRequest, callback){
-  console.log('posting...');
+  //console.log('posting...');
   if (thedata.data){
     var i = Math.floor((Math.random() * thedata.data.length));
     if(thedata.data[i] && thedata.data[i].images && thedata.data[i].images.original){

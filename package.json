@@ -12,7 +12,8 @@
     "giphy": ">=0.0.4",
     "cool-ascii-faces": "~1.3.x",
     "request": ">=2.65.0",
-    "querystring" : "latest"
+    "querystring" : "latest",
+    "roll" : "latest"
   },
   "engines": {
     "node": "0.10.x"
