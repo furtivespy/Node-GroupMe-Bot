@@ -5,7 +5,7 @@ exports.respond = function(theRequest, callback){
     console.log('Let\'s Roll');
     var roll = new Roll();
     if (roll.validate(theRequest.text.trim().substring(5))){
-      callback(true, theRequest.name + ' rolled ' + roll.roll(theRequest.text.trim().substring(5)));
+      callback(true, theRequest.name + ' rolled ' + roll.roll(theRequest.text.trim().substring(5)).result);
     } else {
       callback(true, 'I don\'t know how to roll ' + theRequest.text.trim().substring(5));
     }
