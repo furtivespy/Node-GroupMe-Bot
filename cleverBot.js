@@ -1,4 +1,4 @@
-var Cleverbot = require('Cleverbot.io');
+var Cleverbot = require('cleverbot.io');
 
 exports.respond = function(theRequest, callback){
   if (theRequest.text && (
