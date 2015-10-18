@@ -9,7 +9,7 @@ exports.respond = function(theRequest, callback){
       )){
     console.log('cleverbot');
     var trim;
-    if (theRequest.text.trim().toLowerCase().startsWith('robot friend'){
+    if (theRequest.text.trim().toLowerCase().startsWith('robot friend')){
       trim = 14; //remove "robot friend, "
     } else {
       trim = 7; //remove "robot, "
