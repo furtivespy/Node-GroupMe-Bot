@@ -3,10 +3,10 @@ var Cleverbot = require('Cleverbot.io');
 exports.respond = function(theRequest, callback){
   if (theRequest.text && (
         theRequest.text.trim().toLowerCase().startsWith('robot, ') ||
-        theRequest.text.trim().toLowerCase().startsWith('robot: ')
-        theRequest.text.trim().toLowerCase().startsWith('robot friend, ')
+        theRequest.text.trim().toLowerCase().startsWith('robot: ') ||
+        theRequest.text.trim().toLowerCase().startsWith('robot friend, ') ||
         theRequest.text.trim().toLowerCase().startsWith('robot friend: ')
-      ){
+      )){
     console.log('cleverbot');
     var trim;
     if (theRequest.text.trim().toLowerCase().startsWith('robot friend'){
