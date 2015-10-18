@@ -13,7 +13,8 @@
     "cool-ascii-faces": "~1.3.x",
     "request": ">=2.65.0",
     "querystring" : "latest",
-    "roll" : "latest"
+    "roll" : "latest",
+    "cleverbot.io":"latest"
   },
   "engines": {
     "node": "0.10.x"
