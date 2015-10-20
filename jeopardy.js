@@ -48,7 +48,8 @@ function sendNewQuestion(sendmessage){
     client.set('currentAnswer', body.answer);
     client.set('currentValue', body.value);
     client.set('isQuestionOutstanding', true);
-    sendmessage(true, body.category.title + " for $" + body.value);
+    console.log(body);
+    sendmessage(true, body.category);// + " for $" + body.value);
     sendmessage(true, body.question);
 
   });
