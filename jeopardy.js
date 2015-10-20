@@ -13,7 +13,7 @@ exports.respond = function(theRequest, callback){
   client.get('isQuestionOutstanding', function(err, isQuestionOutstanding) {
     if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('jeopardy')){
       console.log('jeopardy');
-      if (isQuestionOutstanding){
+      if (isQuestionOutstanding == 'true'){
         client.get('currentAnswer', function(er, currentAnswer) {
           callback(true, "The previous answer was: " + currentAnswer);
           sendNewQuestion(callback);
@@ -26,10 +26,10 @@ exports.respond = function(theRequest, callback){
         console.log('Answer is ');
         if(currentAnswer.toLowerCase() == theRequest.text.toLowerCase().substring(2).trim()){
           console.log('Answer is correct!');
-          client.set('isQuestionOutstanding', false);
+          client.set('isQuestionOutstanding', 'false');
           client.get('currentValue', function(anErr, currentValue) {
               client.incrby("score:" + theRequest.sender_id, currentValue, function (anotherErr, newScore) {
-                callback(true, "Correct! " + theRequest.name + ", you name have $" + newScore);
+                callback(true, "Correct! " + theRequest.name + ", you now have $" + newScore);
               });
           });
         } else {
@@ -47,7 +47,7 @@ function sendNewQuestion(sendmessage){
   request({url: 'http://jservice.io/api/random', json: true }, function(error, response, body) {
     client.set('currentAnswer', body[0].answer);
     client.set('currentValue', body[0].value);
-    client.set('isQuestionOutstanding', true);
+    client.set('isQuestionOutstanding', 'true');
     sendmessage(true, body[0].category.title + " for $" + body[0].value);
     sendmessage(true, body[0].question);
 
