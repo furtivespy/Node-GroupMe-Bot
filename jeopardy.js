@@ -1,5 +1,13 @@
 var request = require('request');
-var client = require('redis').createClient(process.env.REDIS_URL);
+var redis = require('redis').createClient();
+
+if (process.env.REDIS_URL) {
+  var redisurl = require("url").parse(process.env.REDIS_URL);
+  var client = redis.createClient(redisurl.port, redisurl.hostname);
+  client.auth(redisurl.auth.split(":")[1]);
+} else {
+  var client = redis.createClient();
+}
 
 exports.respond = function(theRequest, callback){
   client.get('isQuestionOutstanding', function(err, isQuestionOutstanding) {
