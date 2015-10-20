@@ -12,7 +12,7 @@ exports.respond = function(theRequest, callback){
         });
       } else {
         sendNewQuestion(callback)
-      });
+      }
     } else if (theRequest.text && isQuestionOutstanding && (theRequest.text.trim().toLowerCase().startsWith('a:') || theRequest.text.trim().toLowerCase().startsWith('a-'))){
       client.get()'currentAnswer', function(er, currentAnswer) {
         console.log('Answer is ');
@@ -28,8 +28,10 @@ exports.respond = function(theRequest, callback){
           callback(true, "Sorry, " + theRequest.text.toLowerCase().substring(2).trim() + " is not the answer.");
         }
       }
+    } else {
+      callback(false;)
     }
-  }
+  });
 }
 
 function sendNewQuestion(sendmessage){
