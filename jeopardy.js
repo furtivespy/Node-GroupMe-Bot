@@ -9,7 +9,7 @@ exports.respond = function(theRequest, callback){
         client.get('currentAnswer', function(er, currentAnswer) {
           callback(true, "The previous answer was: " + currentAnswer);
           sendNewQuestion(callback);
-        }
+        });
       } else {
         sendNewQuestion(callback)
       });
