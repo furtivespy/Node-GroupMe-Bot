@@ -1,5 +1,5 @@
 var request = require('request');
-var redis = require('redis').createClient();
+var redis = require('redis');
 
 if (process.env.REDIS_URL) {
   var redisurl = require("url").parse(process.env.REDIS_URL);
