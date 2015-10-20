@@ -45,12 +45,11 @@ exports.respond = function(theRequest, callback){
 function sendNewQuestion(sendmessage){
   console.log('sending new jeopardy...');
   request({url: 'http://jservice.io/api/random', json: true }, function(error, response, body) {
-    client.set('currentAnswer', body.answer);
-    client.set('currentValue', body.value);
+    client.set('currentAnswer', body[0].answer);
+    client.set('currentValue', body[0].value);
     client.set('isQuestionOutstanding', true);
-    console.log(body);
-    sendmessage(true, body.category);// + " for $" + body.value);
-    sendmessage(true, body.question);
+    sendmessage(true, body[0].category.title + " for $" + body[0].value);
+    sendmessage(true, body[0].question);
 
   });
 }
