@@ -26,7 +26,7 @@ function searchGifMe(theRequest, callback, trim) {
             query: theRequest.text.trim().substring(trim),
             limit: 25,
             page: 0,
-            swf: 'false',
+            sfw: false,
             key: process.env.GIFME_KEY }),
           json: true },
           function(error, response, body) {
