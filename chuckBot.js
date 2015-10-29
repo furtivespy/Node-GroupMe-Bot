@@ -2,7 +2,7 @@ var request = require('request');
 var qs = require( 'querystring' );
 
 exports.respond = function(theRequest, callback){
-  if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/chuck me')){
+   if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/chuck me')){
       getJoke(theRequest, callback, theRequest.name);
  } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/chuck')){
       getJoke(theRequest, callback);
@@ -23,6 +23,4 @@ function getJoke(theRequest, callback, name) {
   request({url: 'http://api.icndb.com/jokes/random?' + query, json: true }, function(error, response, body) {
     callback(true, body.value.joke.replace(/  /g, " "));
   });
-}
-
 }
