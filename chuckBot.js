@@ -6,7 +6,7 @@ exports.respond = function(theRequest, callback){
       getJoke(theRequest, callback, theRequest.name);
  } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/chuck')){
       getJoke(theRequest, callback);
- } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('dennis')){
+ } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('dennis') && !theRequest.name.toLowerCase().startsWith('robot')){
       getJoke(theRequest, callback, 'Dennis Flanders');
  } else {
    callback(false);
