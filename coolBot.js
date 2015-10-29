@@ -14,7 +14,7 @@ exports.respond = function(theRequest, callback){
                     '"roll [dice]" and I\'ll roll some dice for you.\n' +
                     '"robot," or "robot friend," and you can chat with me.\n' +
                     '"Jeopardy" for some trivia. use "a-" to try and answer.\n' +
-                    '"/chuck" for a Chuck Norris joke or "/chuck me" for a you version of the joke.\n'
+                    '"/chuck" for a Chuck Norris joke or "/chuck me" for a you version of the joke.\n' +
                     '"gm [search]" to search gifme for a gif or "g [search]" to search giphy and gifme for a gif.\n' +
                     'And of course you found this "robohelp" or "robot help" ' + cool());
 
