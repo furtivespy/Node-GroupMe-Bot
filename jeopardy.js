@@ -48,8 +48,6 @@ function sendNewQuestion(sendmessage){
     client.set('currentAnswer', body[0].answer);
     client.set('currentValue', body[0].value);
     client.set('isQuestionOutstanding', 'yes');
-    sendmessage(true, body[0].category.title + " for $" + body[0].value);
-    sendmessage(true, body[0].question);
-
+    sendmessage(true, body[0].category.title + " for $" + body[0].value + "\n" + body[0].question);
   });
 }

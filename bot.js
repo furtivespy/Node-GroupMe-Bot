@@ -5,6 +5,7 @@ var yesnoBot = require('./yesnoBot.js');
 var diceBot = require('./diceBot.js');
 var cleverbot = require('./cleverBot.js');
 var jeopardybot = require('./jeopardy.js');
+var chuck = require('./chuckBot.js');
 var botID = process.env.BOT_ID;
 
 
@@ -19,6 +20,7 @@ function respond() {
   diceBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
   cleverbot.respond(request, function(send, data) { botCallback(send, data, this.res)});
   jeopardybot.respond(request, function(send, data) { botCallback(send, data, this.res)});
+  chuck.respond(request, function(send, data) { botCallback(send, data, this.res)});
 }
 
 function botCallback(sendMessage, messageData, res){
