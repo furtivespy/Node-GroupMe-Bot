@@ -18,8 +18,8 @@ exports.respond = function(theRequest, callback){
           var hangingGame = JSON.parse(theHangmanGame);
           if (theRequest.text.trim().toLowerCase().startsWith('hangman')){
             showGallows(callback, hangingGame);
-          } else if (theWord.text.trim().toLowerCase().match(/^[a-z]$/)){
-            var aGuess = theWord.text.trim().toLowerCase();
+          } else if (theRequest.text.trim().toLowerCase().match(/^[a-z]$/)){
+            var aGuess = theRequest.text.trim().toLowerCase();
             if (hangingGame.guessedLetters.indexOf(aGuess) < 0) { //new letter
               hangingGame.guessedLetters.push(aGuess);
               if (hangingGame.theWord.indexOf(aGuess) < 0) { //wrong
