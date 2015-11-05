@@ -36,8 +36,8 @@ exports.respond = function(theRequest, callback){
               } else { //RIGHT!
                 showGallows(callback, hangingGame);
                 var win = true;
-                for (var i = 0, len = gameObject.theWord.length; i < len; i++) {
-                  if (guessedLetters.indexOf(gameObject.theWord[i]) < 0) {
+                for (var i = 0, len = hangingGame.theWord.length; i < len; i++) {
+                  if (hangingGame.guessedLetters.indexOf(hangingGame.theWord[i]) < 0) {
                     win = false;
                   }
                 }
@@ -90,11 +90,11 @@ function showGallows(chatCall, gameObject){
   }
   chatCall(true, 'The Hangman Word: ' + hangword + '\n' +
                  ' &nbsp; &nbsp; _______\n' +
-                 ' &nbsp; &nbsp;|/ &nbsp; &nbsp; &nbsp; &nbsp;|\n' +
-                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 0)?'(_)':'') + '\n' +
-                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 2)?'\\':' ') + ((gameObject.numWrong > 1)?'|':'') + ((gameObject.numWrong > 3)?'/':'') + '\n' +
-                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 1)?'|':'') + '\n' +
-                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 4)?'/':'') + ' ' + ((gameObject.numWrong > 5)?'\\':'') + '\n' +
+                 ' &nbsp; &nbsp;|/ &nbsp; &nbsp; &nbsp;|\n' +
+                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 0)?'(_)':'') + '\n' +
+                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 2)?'\\':' ') + ((gameObject.numWrong > 1)?'|':'') + ((gameObject.numWrong > 3)?'/':'') + '\n' +
+                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 1)?'|':'') + '\n' +
+                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 4)?'/':'') + ' ' + ((gameObject.numWrong > 5)?'\\':'') + '\n' +
                  ' &nbsp; &nbsp;|\n' +
                  '___|___ Guessed: ' + gameObject.guessedLetters.join(','));
 }
