@@ -17,11 +17,11 @@ exports.respond = function(theRequest, callback){
       if(isPlayingHangman == 'yes'){
         client.get('theHangmanGame', function (err, theHangmanGame){
           var hangingGame = JSON.parse(theHangmanGame);
-          console.log(theRequest.text.trim().toLowerCase());
           console.log(oneLetter.test(theRequest.text.trim().toLowerCase()));
           if (theRequest.text.trim().toLowerCase().startsWith('hangman')){
             showGallows(callback, hangingGame);
           } else if (oneLetter.test(theRequest.text.trim().toLowerCase())){
+            console.log(theRequest.text.trim().toLowerCase());
             var aGuess = theRequest.text.trim().toLowerCase();
             if (hangingGame.guessedLetters.indexOf(aGuess) < 0) { //new letter
               hangingGame.guessedLetters.push(aGuess);
