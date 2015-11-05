@@ -21,7 +21,7 @@ exports.respond = function(theRequest, callback){
           if (theRequest.text.trim().toLowerCase().startsWith('hangman')){
             showGallows(callback, hangingGame);
           } else if (oneLetter.test(theRequest.text.trim().toLowerCase())){
-            console.log(theRequest.text.trim().toLowerCase());
+            console.log(hangingGame.guessedLetters.indexOf(aGuess));
             var aGuess = theRequest.text.trim().toLowerCase();
             if (hangingGame.guessedLetters.indexOf(aGuess) < 0) { //new letter
               hangingGame.guessedLetters.push(aGuess);
