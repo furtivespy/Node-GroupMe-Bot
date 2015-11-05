@@ -92,9 +92,9 @@ function showGallows(chatCall, gameObject){
                  ' &nbsp; &nbsp; _______\n' +
                  ' &nbsp; &nbsp;|/ &nbsp; &nbsp; &nbsp;|\n' +
                  ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 0)?'(_)':'') + '\n' +
-                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 2)?'\\':' ') + ((gameObject.numWrong > 1)?'|':'') + ((gameObject.numWrong > 3)?'/':'') + '\n' +
+                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 2)?'\\':'&nbsp;') + ((gameObject.numWrong > 1)?'|':'') + ((gameObject.numWrong > 3)?'/':'') + '\n' +
                  ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 1)?'|':'') + '\n' +
-                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 4)?'/':'') + ' ' + ((gameObject.numWrong > 5)?'\\':'') + '\n' +
+                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 4)?'/':'') + '&nbsp;' + ((gameObject.numWrong > 5)?'\\':'') + '\n' +
                  ' &nbsp; &nbsp;|\n' +
                  '___|___ Guessed: ' + gameObject.guessedLetters.join(','));
 }
