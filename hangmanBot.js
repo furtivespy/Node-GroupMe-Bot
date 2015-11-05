@@ -16,6 +16,8 @@ exports.respond = function(theRequest, callback){
       if(isPlayingHangman == 'yes'){
         client.get('theHangmanGame', function (err, theHangmanGame){
           var hangingGame = JSON.parse(theHangmanGame);
+          console.log(theRequest.text.trim().toLowerCase());
+          console.log(theRequest.text.trim().toLowerCase().match(/^[a-z]$/));
           if (theRequest.text.trim().toLowerCase().startsWith('hangman')){
             showGallows(callback, hangingGame);
           } else if (theRequest.text.trim().toLowerCase().match(/^[a-z]$/)){
