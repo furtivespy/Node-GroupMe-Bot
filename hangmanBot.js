@@ -1,6 +1,7 @@
 var request = require('request');
 var qs = require( 'querystring' );
 var redis = require('redis');
+var oneLetter = /^[a-z]$/;
 
 if (process.env.REDIS_URL) {
   var redisurl = require("url").parse(process.env.REDIS_URL);
@@ -17,10 +18,10 @@ exports.respond = function(theRequest, callback){
         client.get('theHangmanGame', function (err, theHangmanGame){
           var hangingGame = JSON.parse(theHangmanGame);
           console.log(theRequest.text.trim().toLowerCase());
-          console.log(theRequest.text.trim().toLowerCase().match(/^[a-z]$/));
+          console.log(oneLetter.test(theRequest.text.trim().toLowerCase()));
           if (theRequest.text.trim().toLowerCase().startsWith('hangman')){
             showGallows(callback, hangingGame);
-          } else if (theRequest.text.trim().toLowerCase().match(/^[a-z]$/)){
+          } else if (oneLetter.test(theRequest.text.trim().toLowerCase())){
             var aGuess = theRequest.text.trim().toLowerCase();
             if (hangingGame.guessedLetters.indexOf(aGuess) < 0) { //new letter
               hangingGame.guessedLetters.push(aGuess);
