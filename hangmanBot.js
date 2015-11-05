@@ -84,7 +84,7 @@ function showGallows(chatCall, gameObject){
       hangword += gameObject.theWord[i] + ' ';
     }
   }
-  chatCall(true, 'Hangman: ' + hangword + '\n' +
+  chatCall(true, 'The Hangman Word: ' + hangword + '\n' +
                  '    _______\n' +
                  '   |/      |\n' +
                  '   |      ' + ((gameObject.numWrong > 0)?'(_)':'') + '\n' +
