@@ -78,7 +78,7 @@ exports.respond = function(theRequest, callback){
 function showGallows(chatCall, gameObject){
   var hangword = "";
   for (var i = 0, len = gameObject.theWord.length; i < len; i++) {
-    if (guessedLetters.indexOf(gameObject.theWord[i]) < 0) {
+    if (gameObject.guessedLetters.indexOf(gameObject.theWord[i]) < 0) {
       hangword += '_ ';
     } else {
       hangword += gameObject.theWord[i] + ' ';
