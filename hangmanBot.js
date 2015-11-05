@@ -21,10 +21,10 @@ exports.respond = function(theRequest, callback){
           if (theRequest.text.trim().toLowerCase().startsWith('hangman')){
             showGallows(callback, hangingGame);
           } else if (oneLetter.test(theRequest.text.trim().toLowerCase())){
-            console.log(hangingGame.guessedLetters.indexOf(aGuess));
             var aGuess = theRequest.text.trim().toLowerCase();
             if (hangingGame.guessedLetters.indexOf(aGuess) < 0) { //new letter
               hangingGame.guessedLetters.push(aGuess);
+              console.log(JSON.stringify(hangingGame));
               if (hangingGame.theWord.indexOf(aGuess) < 0) { //wrong
                 hangingGame.numWrong++;
                 if (hangingGame.numWrong > 5) { //GAME OVER MAN!
