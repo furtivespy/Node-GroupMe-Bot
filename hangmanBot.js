@@ -17,20 +17,21 @@ exports.respond = function(theRequest, callback){
       if(isPlayingHangman == 'yes'){
         client.get('theHangmanGame', function (err, theHangmanGame){
           var hangingGame = JSON.parse(theHangmanGame);
-          console.log(oneLetter.test(theRequest.text.trim().toLowerCase()));
           if (theRequest.text.trim().toLowerCase().startsWith('hangman')){
             showGallows(callback, hangingGame);
           } else if (oneLetter.test(theRequest.text.trim().toLowerCase())){
             var aGuess = theRequest.text.trim().toLowerCase();
             if (hangingGame.guessedLetters.indexOf(aGuess) < 0) { //new letter
               hangingGame.guessedLetters.push(aGuess);
-              console.log(JSON.stringify(hangingGame));
               if (hangingGame.theWord.indexOf(aGuess) < 0) { //wrong
                 hangingGame.numWrong++;
                 if (hangingGame.numWrong > 5) { //GAME OVER MAN!
                   showGallows(callback, hangingGame);
                   callback(true, 'You Lose! The word was ' + hangingGame.theWord);
                   client.set('isPlayingHangman', 'no');
+                } else { //Keep Guessing!
+                  client.set('theHangmanGame', JSON.stringify(hangingGame));
+                  showGallows(callback, hangingGame);
                 }
               } else { //RIGHT!
                 showGallows(callback, hangingGame);
@@ -88,12 +89,12 @@ function showGallows(chatCall, gameObject){
     }
   }
   chatCall(true, 'The Hangman Word: ' + hangword + '\n' +
-                 '    _______\n' +
-                 '   |/      |\n' +
-                 '   |      ' + ((gameObject.numWrong > 0)?'(_)':'') + '\n' +
-                 '   |      ' + ((gameObject.numWrong > 2)?'\\':' ') + ((gameObject.numWrong > 1)?'|':'') + ((gameObject.numWrong > 3)?'/':'') + '\n' +
-                 '   |       ' + ((gameObject.numWrong > 1)?'|':'') + '\n' +
-                 '   |      ' + ((gameObject.numWrong > 4)?'/':'') + ' ' + ((gameObject.numWrong > 5)?'\\':'') + '\n' +
-                 '   |\n' +
+                 ' &nbsp; &nbsp; _______\n' +
+                 ' &nbsp; &nbsp;|/ &nbsp; &nbsp; &nbsp; &nbsp;|\n' +
+                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 0)?'(_)':'') + '\n' +
+                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 2)?'\\':' ') + ((gameObject.numWrong > 1)?'|':'') + ((gameObject.numWrong > 3)?'/':'') + '\n' +
+                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 1)?'|':'') + '\n' +
+                 ' &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp;' + ((gameObject.numWrong > 4)?'/':'') + ' ' + ((gameObject.numWrong > 5)?'\\':'') + '\n' +
+                 ' &nbsp; &nbsp;|\n' +
                  '___|___ Guessed: ' + gameObject.guessedLetters.join(','));
 }
