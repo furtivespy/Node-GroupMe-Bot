@@ -4,6 +4,8 @@ var qs = require( 'querystring' );
 exports.respond = function(theRequest, callback){
    if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/chuck me')){
       getJoke(theRequest, callback, theRequest.name);
+ } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/chuck ')){
+      getJoke(theRequest, callback, theRequest.text.trim().substring(6).trim());
  } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/chuck')){
       getJoke(theRequest, callback);
  } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('dennis') && !theRequest.name.toLowerCase().startsWith('robot')){

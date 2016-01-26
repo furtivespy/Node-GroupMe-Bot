@@ -20,7 +20,6 @@ exports.respond = function(theRequest, callback){
                     'And of course you found this "robohelp" or "robot help" ' + cool());
 
   } else {
-    console.log('no face');
     callback(false);
   }
 }
