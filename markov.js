@@ -27,13 +27,11 @@ exports.respond = function(theRequest, callback){
 			mustRespond = true;
 		}
 		log(words);
-		if (mustRespond || Math.random() <= roboResponseChance) { //Respond!
-			var x = Math.floor(Math.random() * (words.length-1))
-			console.log('Robot Response:');
-			var newWords = createChain(words[x],words[x+1]);
-			console.log(newWords.join(' '));
-			callback(true, newWords.join(' '));
-		}
+		//if (mustRespond || Math.random() <= roboResponseChance) { //Respond!
+		//	var x = Math.floor(Math.random() * (words.length-1))
+		//	console.log('Robot Response:');
+		//	createChain(words[x],words[x+1], callback);
+		//}
 		callback(false);
 	}
 }
@@ -54,7 +52,7 @@ function makeKey(prev, next){
 	return prefix + ':' + prev + ":" + next;
 }
 
-function createChain(seed1,seed2) {
+function createChain(seed1,seed, cb) {
 	var chain; 
 	console.log('making chain - ' + seed1 + ' ' + seed2);
 	client.exists(makeKey(seed1,seed2), function(err, members){
@@ -89,14 +87,14 @@ function getRandomStart()
 	})
 }
 
-function nextWord(key){
+function nextWord(key, cb){
 	client.zrange(key,0,-1,'withscores',function(err, memebers){
 		var words = {};
 		for (i=0,j=memebers.length; i<j; i+=2) {
     		temparray = array.slice(i,i+2);
     		words[temparray[0]] = temparray[1];
 		}
-		return deck.pick(words)	
+		cb(deck.pick(words));
 	})
 	
 }
