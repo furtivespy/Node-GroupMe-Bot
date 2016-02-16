@@ -55,7 +55,8 @@ function makeKey(prev, next){
 }
 
 function createChain(seed1,seed2) {
-	var chain; 
+	var chain[]; 
+	console.log('making chain - ' + seed1 + ' ' + seed2);
 	client.exists(makeKey(seed1,seed2), function(err, members){
 		if (members != 1) {
 			var key = getRandomStart();
@@ -73,6 +74,7 @@ function createChain(seed1,seed2) {
 			seed1=seed2;
 			seed2=aword;
 		}	
+		console.log(chain.join(' '));
 		return chain;
 	})
 	
