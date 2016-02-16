@@ -20,7 +20,7 @@ exports.respond = function(theRequest, callback){
 		 theRequest.text.trim().toLowerCase().startsWith('gm ')) {
 		callback(false); //do nothing in these cases
 	} else {
-		var words = theRequest.text.trim().toLowerCase().replace(/:/g,'').split(/\s+/).filter(function(thisArg){ return (len(thisArg) > 0); });
+		var words = theRequest.text.trim().toLowerCase().replace(/:/g,'').split(/\s+/).filter(function(thisArg){ return (thisArg.length > 0); });
 		var mustRespond = false;
 		if (words[0] == 'robot,' || words[0] == 'robot'){
 			words.shift();
@@ -28,7 +28,7 @@ exports.respond = function(theRequest, callback){
 		}
 		log(words);
 		if (mustRespond || Math.random() <= roboResponseChance) { //Respond!
-			var x = Math.floor(Math.random() * (len(words)-1))
+			var x = Math.floor(Math.random() * (words.length-1))
 			console.log('Robot Response:');
 			var newWords = createChain(words[x],words[x+1]);
 			console.log(newWords.join(' '));
@@ -39,9 +39,9 @@ exports.respond = function(theRequest, callback){
 }
 
 function log(message){
-	if (len(message) > 3) { //only log things longer than 3 words.
+	if (message.length > 3) { //only log things longer than 3 words.
 		message.push(endWord);
-		while (len(message) > 2)
+		while (message.length > 2)
 		{
 			client.zincrby(makeKey(message[0],message[1]), message[2]);
 			console.log(message[0] + ':' + message[1] + ' - ' + message[2]);
