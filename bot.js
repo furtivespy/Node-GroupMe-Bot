@@ -7,6 +7,7 @@ var cleverbot = require('./cleverBot.js');
 var jeopardybot = require('./jeopardy.js');
 var chuck = require('./chuckBot.js');
 var hangman = require('./hangmanBot.js');
+var markov = require('./markov.js');
 var botID = process.env.BOT_ID;
 
 
@@ -19,10 +20,11 @@ function respond() {
   gifBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
   yesnoBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
   diceBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
-  cleverbot.respond(request, function(send, data) { botCallback(send, data, this.res)});
+  //cleverbot.respond(request, function(send, data) { botCallback(send, data, this.res)});
   jeopardybot.respond(request, function(send, data) { botCallback(send, data, this.res)});
   chuck.respond(request, function(send, data) { botCallback(send, data, this.res)});
   hangman.respond(request, function(send, data) { botCallback(send, data, this.res)});
+  markov.respond(request, function(send, data) { botCallback(send, data, this.res)});
 }
 
 function botCallback(sendMessage, messageData, res){
