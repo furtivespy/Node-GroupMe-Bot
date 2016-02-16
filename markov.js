@@ -43,7 +43,7 @@ function log(message){
 		message.push(endWord);
 		while (message.length > 2)
 		{
-			client.zincrby(makeKey(message[0],message[1]), message[2]);
+			client.zincrby(makeKey(message[0],message[1]), 1, message[2]);
 			console.log(message[0] + ':' + message[1] + ' - ' + message[2]);
 			message.shift();
 		}
