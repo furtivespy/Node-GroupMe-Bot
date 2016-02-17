@@ -85,9 +85,8 @@ function buildPhrase(thePhrase, cb){
 		var words = {};
 		for (i=0,j=members.length; i<j; i+=2) {
     		var temparray = members.slice(i,i+2);
-    		words[temparray[0]] = temparray[1];
+    		words[temparray[0]] = parseInt(temparray[1]);
 		}
-		console.log(JSON.stringify(words));
 		var newWord = deck.pick(words); //pick a random word (weighted based on usual use)
 		console.log(newWord);
 		if (newWord == endWord || thePhrase.length > 35){ //if the new word says to end the sentance or bot is getting too chatty, then send phrase
