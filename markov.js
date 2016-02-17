@@ -27,7 +27,7 @@ exports.respond = function(theRequest, callback){
 			words.shift();
 			mustRespond = true;
 		}
-		if (mustRespond || (Math.floor(Math.random() * 100) <= roboResponseChance) { //Respond!
+		if (mustRespond || (Math.floor(Math.random() * 100) <= roboResponseChance)) { //Respond!
 			var x = Math.floor(Math.random() * (words.length))
 			var y = Math.floor(Math.random() * (words.length))
 			console.log('Robot Response: ' + x +  ' ' + y);
