@@ -81,8 +81,8 @@ function getRandomStart(cb)
 }
 
 function buildPhrase(thePhrase, cb){
-	console.log(thePhrase.join(' '));
 	client.zrange(makeKey(thePhrase[thePhrase.length-2],thePhrase[thePhrase.length-1]),0,-1,'withscores',function(err, members){
+		console.log(thePhrase.join(' '));
 		var words = {};
 		for (i=0,j=members.length; i<j; i+=2) {
     		var temparray = members.slice(i,i+2);
