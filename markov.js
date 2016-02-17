@@ -81,10 +81,10 @@ function getRandomStart(cb)
 }
 
 function buildPhrase(thePhrase, cb){
-	client.zrange(makeKey(thePhrase[thePhrase.length-2],thePhrase[thePhrase.length-1]),0,-1,'withscores',function(err, memebers){
+	client.zrange(makeKey(thePhrase[thePhrase.length-2],thePhrase[thePhrase.length-1]),0,-1,'withscores',function(err, members){
 		var words = {};
-		for (i=0,j=memebers.length; i<j; i+=2) {
-    		var temparray = array.slice(i,i+2);
+		for (i=0,j=members.length; i<j; i+=2) {
+    		var temparray = members.slice(i,i+2);
     		words[temparray[0]] = temparray[1];
 		}
 		var newWord = deck.pick(words); //pick a random word (weighted based on usual use)
