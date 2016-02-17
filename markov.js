@@ -53,7 +53,7 @@ function makeKey(prev, next){
 	return prefix + ':' + prev + ":" + next;
 }
 
-function createChain(seed1,seed, cb) {
+function createChain(seed1,seed2, cb) {
 	var chain; 
 	console.log('making chain - ' + seed1 + ' ' + seed2);
 	client.exists(makeKey(seed1,seed2), function(err, members){
