@@ -1,7 +1,7 @@
 var redis = require('redis');
 var deck = require('deck'); //for good random selection
 var endWord = '\x03';
-var roboResponseChance = .01;
+var roboResponseChance = .02;
 var prefix = 'markov';
 
 if (process.env.REDIS_URL) {
@@ -27,11 +27,12 @@ exports.respond = function(theRequest, callback){
 			mustRespond = true;
 		}
 		log(words);
-		//if (mustRespond || Math.random() <= roboResponseChance) { //Respond!
-		//	var x = Math.floor(Math.random() * (words.length-1))
-		//	console.log('Robot Response:');
-		//	createChain(words[x],words[x+1], callback);
-		//}
+		if (mustRespond || Math.random() <= roboResponseChance) { //Respond!
+			var x = Math.floor(Math.random() * (words.length))
+			var y = Math.floor(Math.random() * (words.length))
+			console.log('Robot Response:');
+			createChain(words[x],words[y], callback); //start with 2 random words from what was said.
+		}
 		callback(false);
 	}
 }
@@ -57,44 +58,42 @@ function createChain(seed1,seed, cb) {
 	console.log('making chain - ' + seed1 + ' ' + seed2);
 	client.exists(makeKey(seed1,seed2), function(err, members){
 		if (members != 1) {
-			var key = getRandomStart();
-			seed1 = key.split(':')[1];
-			seed2 = key.split(':')[2];
-		}  
-		chain.push(seed1);
-		chain.push(seed2);
-		for (i=0;i<30;i++){
-			var aword = nextWord(makeKey(seed1,seed2));
-			if (aword == endWord)
-				i=30;
-			else
-				chain.push(aword);
-			seed1=seed2;
-			seed2=aword;
-		}	
-		console.log(chain.join(' '));
-		return chain;
-	})
-	
+			getRandomStart(cb); //if 2 random words don't exist together in dictionary, just get a random key to start on.
+		}  else {
+			chain.push(seed1);
+			chain.push(seed2);
+			buildPhrase(chain,cb);
+		}
+	});
 }
 
-function getRandomStart()
+function getRandomStart(cb)
 {
 	client.randomkey(function(result,key){
-		if (key.startsWith(prefix)) 
-			return key;
-		else return getRandomStart();
+		if (key.startsWith(prefix)) { //make sure the random key is part of the markov chains
+			var words;
+			words.push(key.split(':')[1]);
+			words.push(key.split(':')[2]);
+			buildPhrase(words,cb);
+		}
+		else getRandomStart(cb);
 	})
 }
 
-function nextWord(key, cb){
-	client.zrange(key,0,-1,'withscores',function(err, memebers){
+function buildPhrase(thePhrase, cb){
+	client.zrange(makeKey(thePhrase[thePhrase.length-2],thePhrase[thePhrase.length-1]),0,-1,'withscores',function(err, memebers){
 		var words = {};
 		for (i=0,j=memebers.length; i<j; i+=2) {
     		temparray = array.slice(i,i+2);
     		words[temparray[0]] = temparray[1];
 		}
-		cb(deck.pick(words));
+		var newWord = deck.pick(words); //pick a random word (weighted based on usual use)
+		console.log(newWord);
+		if (newWord == endWord || thePhrase.length > 35){ //if the new word says to end the sentance or bot is getting too chatty, then send phrase
+			cb(true, thePhrase.join(' '));
+		} else {
+			buildPhrase(thePhrase.push(newWord),cb);
+		}
 	})
 	
 }
