@@ -1,7 +1,7 @@
 var redis = require('redis');
 var deck = require('deck'); //for good random selection
 var endWord = '\x03';
-var roboResponseChance = .02;
+var roboResponseChance = 2; //% chance to randomly talk
 var prefix = 'markov';
 var constructedPhrase = [];
 
@@ -27,7 +27,7 @@ exports.respond = function(theRequest, callback){
 			words.shift();
 			mustRespond = true;
 		}
-		if (mustRespond || Math.random() <= roboResponseChance) { //Respond!
+		if (mustRespond || (Math.floor(Math.random() * 100) <= roboResponseChance) { //Respond!
 			var x = Math.floor(Math.random() * (words.length))
 			var y = Math.floor(Math.random() * (words.length))
 			console.log('Robot Response: ' + x +  ' ' + y);
@@ -89,8 +89,14 @@ function buildPhrase(cb){
 		}
 		var newWord = deck.pick(words); //pick a random word (weighted based on usual use)
 		console.log('add: ' + newWord);
-		if (newWord == endWord || constructedPhrase.length > 35){ //if the new word says to end the sentance or bot is getting too chatty, then send phrase
-			cb(true, constructedPhrase.join(' '));
+		if (newWord == endWord || constructedPhrase.length > 40){ //if the new word says to end the sentance...
+			if (constructedPhrase.length < 8) {
+				constructedPhrase.push("...");
+				getRandomStart(cb);
+			} else {
+				cb(true, constructedPhrase.join(' '));	
+			}
+			
 		} else {
 			constructedPhrase.push(newWord);
 			buildPhrase(cb);
