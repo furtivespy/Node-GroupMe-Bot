@@ -54,7 +54,7 @@ function makeKey(prev, next){
 }
 
 function createChain(seed1,seed2, cb) {
-	var chain; 
+	var chain = []; 
 	console.log('making chain - ' + seed1 + ' ' + seed2);
 	client.exists(makeKey(seed1,seed2), function(err, members){
 		if (members != 1) {
@@ -71,7 +71,7 @@ function getRandomStart(cb)
 {
 	client.randomkey(function(result,key){
 		if (key.startsWith(prefix)) { //make sure the random key is part of the markov chains
-			var words;
+			var words = [];
 			words.push(key.split(':')[1]);
 			words.push(key.split(':')[2]);
 			buildPhrase(words,cb);
