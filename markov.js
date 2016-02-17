@@ -26,13 +26,13 @@ exports.respond = function(theRequest, callback){
 			words.shift();
 			mustRespond = true;
 		}
-		log(words);
 		if (mustRespond || Math.random() <= roboResponseChance) { //Respond!
 			var x = Math.floor(Math.random() * (words.length))
 			var y = Math.floor(Math.random() * (words.length))
-			console.log('Robot Response:');
+			console.log('Robot Response: ' + x +  ' ' + y);
 			createChain(words[x],words[y], callback); //start with 2 random words from what was said.
 		}
+		log(words);
 		callback(false);
 	}
 }
