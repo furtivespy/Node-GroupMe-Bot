@@ -3,6 +3,7 @@ var deck = require('deck'); //for good random selection
 var endWord = '\x03';
 var roboResponseChance = .02;
 var prefix = 'markov';
+var constructedPhrase = [];
 
 if (process.env.REDIS_URL) {
   var redisurl = require("url").parse(process.env.REDIS_URL);
@@ -54,15 +55,14 @@ function makeKey(prev, next){
 }
 
 function createChain(seed1,seed2, cb) {
-	var chain = []; 
 	console.log('making chain - ' + seed1 + ' ' + seed2);
 	client.exists(makeKey(seed1,seed2), function(err, members){
 		if (members != 1) {
 			getRandomStart(cb); //if 2 random words don't exist together in dictionary, just get a random key to start on.
 		}  else {
-			chain.push(seed1);
-			chain.push(seed2);
-			buildPhrase(chain,cb);
+			constructedPhrase.push(seed1);
+			constructedPhrase.push(seed2);
+			buildPhrase(cb);
 		}
 	});
 }
@@ -71,18 +71,16 @@ function getRandomStart(cb)
 {
 	client.randomkey(function(result,key){
 		if (key.startsWith(prefix)) { //make sure the random key is part of the markov chains
-			var words = [];
-			words.push(key.split(':')[1]);
-			words.push(key.split(':')[2]);
-			buildPhrase(words,cb);
+			constructedPhrase.push(key.split(':')[1]);
+			constructedPhrase.push(key.split(':')[2]);
+			buildPhrase(cb);
 		}
 		else getRandomStart(cb);
 	})
 }
 
-function buildPhrase(thePhrase, cb){
-	client.zrange(makeKey(thePhrase[thePhrase.length-2],thePhrase[thePhrase.length-1]),0,-1,'withscores',function(err, members){
-		console.log(thePhrase.join(' '));
+function buildPhrase(cb){
+	client.zrange(makeKey(constructedPhrase[constructedPhrase.length-2],constructedPhrase[constructedPhrase.length-1]),0,-1,'withscores',function(err, members){
 		var words = {};
 		for (i=0,j=members.length; i<j; i+=2) {
     		var temparray = members.slice(i,i+2);
@@ -90,10 +88,11 @@ function buildPhrase(thePhrase, cb){
 		}
 		var newWord = deck.pick(words); //pick a random word (weighted based on usual use)
 		console.log('add: ' + newWord);
-		if (newWord == endWord || thePhrase.length > 35){ //if the new word says to end the sentance or bot is getting too chatty, then send phrase
-			cb(true, thePhrase.join(' '));
+		if (newWord == endWord || constructedPhrase.length > 35){ //if the new word says to end the sentance or bot is getting too chatty, then send phrase
+			cb(true, constructedPhrase.join(' '));
 		} else {
-			buildPhrase(thePhrase.push(newWord),cb);
+			constructedPhrase.push(newWord);
+			buildPhrase(cb);
 		}
 	})
 	
