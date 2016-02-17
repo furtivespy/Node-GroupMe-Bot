@@ -81,6 +81,7 @@ function getRandomStart(cb)
 }
 
 function buildPhrase(thePhrase, cb){
+	console.log(thePhrase.join(' '));
 	client.zrange(makeKey(thePhrase[thePhrase.length-2],thePhrase[thePhrase.length-1]),0,-1,'withscores',function(err, members){
 		var words = {};
 		for (i=0,j=members.length; i<j; i+=2) {
@@ -88,7 +89,7 @@ function buildPhrase(thePhrase, cb){
     		words[temparray[0]] = parseInt(temparray[1]);
 		}
 		var newWord = deck.pick(words); //pick a random word (weighted based on usual use)
-		console.log(newWord);
+		console.log('add: ' + newWord);
 		if (newWord == endWord || thePhrase.length > 35){ //if the new word says to end the sentance or bot is getting too chatty, then send phrase
 			cb(true, thePhrase.join(' '));
 		} else {
