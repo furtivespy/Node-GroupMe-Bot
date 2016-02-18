@@ -92,7 +92,7 @@ exports.respond = function(theRequest, callback){
    		 theRequest.text.trim().toLowerCase().indexOf("money") >= 0 ||
    		 theRequest.text.trim().toLowerCase().indexOf("profit") >= 0 ||
    		 theRequest.text.trim().toLowerCase().indexOf("discount") >= 0 ||
-   		 theRequest.text.trim().toLowerCase().indexOf("sale") >= 0){
+   		 theRequest.text.trim().toLowerCase().indexOf("sale") >= 0)){
    			callback(true,deck.pick(rules));
  	} else {
    		callback(false);
