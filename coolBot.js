@@ -7,7 +7,7 @@ exports.respond = function(theRequest, callback){
   if (theRequest.text && botRegex.test(theRequest.text)) {
     console.log('cool face');
     callback(true, cool())
-  } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('robot help')){
+  } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('robohelp')){
     callback(true, 'I\'m a robot and I respond to certain messages that start with: \n' +
                     '"/cool guy" and I make a funny face. \n' +
                     '"Should I" and I\'ll let you know if you should.\n' +
