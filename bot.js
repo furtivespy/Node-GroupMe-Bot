@@ -9,14 +9,17 @@ var chuck = require('./chuckBot.js');
 var hangman = require('./hangmanBot.js');
 var markov = require('./markov.js');
 var ferengi = require('./ferengi.js');
+var jokes = require('./jokes.js');
 var botID = process.env.BOT_ID;
 
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
 
-  //I should to do this in an array, but whatever.
+  //testing... what data did we get:
+  console.log(JSON.stringify(this.res));
 
+  //I should to do this in an array, but whatever.
   coolBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
   gifBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
   yesnoBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
@@ -27,6 +30,7 @@ function respond() {
   hangman.respond(request, function(send, data) { botCallback(send, data, this.res)});
   markov.respond(request, function(send, data) { botCallback(send, data, this.res)});
   ferengi.respond(request, function(send, data) { botCallback(send, data, this.res)});
+  jokes.respond(request, function(send, data) { botCallback(send, data, this.res)});
 }
 
 function botCallback(sendMessage, messageData, res){

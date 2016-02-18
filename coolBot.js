@@ -1,6 +1,15 @@
 /* The Basic Cool Face Bot */
 var cool = require('cool-ascii-faces');
 var flip = require('flip');
+var redis = require('redis');
+
+if (process.env.REDIS_URL) {
+  var redisurl = require("url").parse(process.env.REDIS_URL);
+  var client = redis.createClient(redisurl.port, redisurl.hostname);
+  client.auth(redisurl.auth.split(":")[1]);
+} else {
+  var client = redis.createClient();
+}
 
 exports.respond = function(theRequest, callback){
   var botRegex = /^\/cool guy$/;
@@ -9,7 +18,12 @@ exports.respond = function(theRequest, callback){
     console.log('cool face');
     callback(true, cool());
   } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/flip ')) {
+    client.set('iJustFlipped', theRequest.text.trim().substring(6));
     callback(true, '(╯°□°）╯︵' + flip(theRequest.text.trim().substring(6)));
+  } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/unflip')) {
+    client.get('iJustFlipped', function(anErr, wasFlipped) {
+                callback(true, wasFlipped + "ノ( º _ ºノ)");
+              });
   } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('robohelp')){
     callback(true, 'I\'m a robot and I respond to certain messages that start with: \n' +
                     '"/cool guy" and I make a funny face. \n' +
