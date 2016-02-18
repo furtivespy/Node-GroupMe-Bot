@@ -17,7 +17,11 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]);
 
   //testing... what data did we get:
-  console.log(JSON.stringify(this.res));
+  console.log(this.res.text);
+  console.log(this.res.name);
+  console.log(this.res.sender_type);
+  console.log(this.res.system);
+  console.log(this.res.user_id);
 
   //I should to do this in an array, but whatever.
   coolBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
