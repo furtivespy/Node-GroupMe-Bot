@@ -15,7 +15,8 @@
     "roll" : "latest",
     "cleverbot.io":"latest",
     "redis": "0.12.x",
-    "deck" : ">=0.0.3"
+    "deck" : ">=0.0.3",
+    "flip" : "latest"
   },
   "engines": {
     "node": "0.10.x"

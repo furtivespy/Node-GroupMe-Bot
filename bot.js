@@ -8,6 +8,7 @@ var jeopardybot = require('./jeopardy.js');
 var chuck = require('./chuckBot.js');
 var hangman = require('./hangmanBot.js');
 var markov = require('./markov.js');
+var ferengi = require('./ferengi.js');
 var botID = process.env.BOT_ID;
 
 
@@ -25,6 +26,7 @@ function respond() {
   chuck.respond(request, function(send, data) { botCallback(send, data, this.res)});
   hangman.respond(request, function(send, data) { botCallback(send, data, this.res)});
   markov.respond(request, function(send, data) { botCallback(send, data, this.res)});
+  ferengi.respond(request, function(send, data) { botCallback(send, data, this.res)});
 }
 
 function botCallback(sendMessage, messageData, res){
