@@ -8,7 +8,7 @@ exports.respond = function(theRequest, callback){
       getJoke(theRequest, callback, theRequest.text.trim().substring(6).trim());
  } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/chuck')){
       getJoke(theRequest, callback);
- } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('dennis') && !theRequest.name.toLowerCase().startsWith('robot')){
+ } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('dennis')){
       getJoke(theRequest, callback, 'Dennis Flanders');
  } else {
    callback(false);

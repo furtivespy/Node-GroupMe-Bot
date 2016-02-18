@@ -16,7 +16,6 @@ if (process.env.REDIS_URL) {
 exports.respond = function(theRequest, callback){
 	if (!theRequest.text ||
 		 theRequest.text.trim().toLowerCase().startsWith('/') ||
-		 theRequest.name.toLowerCase().startsWith('robot') ||
 		 theRequest.text.trim().toLowerCase().startsWith('g ') ||
 		 theRequest.text.trim().toLowerCase().startsWith('gm ')) {
 		callback(false); //do nothing in these cases

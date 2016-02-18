@@ -87,7 +87,7 @@ var rules = [
 
 
 exports.respond = function(theRequest, callback){
-   if (theRequest.text && !theRequest.name.toLowerCase().startsWith('robot') &&
+   if (theRequest.text && 
    		(theRequest.text.trim().toLowerCase().indexOf("ferengi") >= 0 ||
    		 theRequest.text.trim().toLowerCase().indexOf("money") >= 0 ||
    		 theRequest.text.trim().toLowerCase().indexOf("profit") >= 0 ||

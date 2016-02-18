@@ -16,21 +16,21 @@ var botID = process.env.BOT_ID;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
 
-  //testing... what data did we get:
-  console.log(JSON.stringify(request));
+  if (request.sender_type != "bot"){ //Ignore messages from yourself!
 
-  //I should to do this in an array, but whatever.
-  coolBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
-  gifBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
-  yesnoBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
-  diceBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
-  //cleverbot.respond(request, function(send, data) { botCallback(send, data, this.res)});
-  jeopardybot.respond(request, function(send, data) { botCallback(send, data, this.res)});
-  chuck.respond(request, function(send, data) { botCallback(send, data, this.res)});
-  hangman.respond(request, function(send, data) { botCallback(send, data, this.res)});
-  markov.respond(request, function(send, data) { botCallback(send, data, this.res)});
-  ferengi.respond(request, function(send, data) { botCallback(send, data, this.res)});
-  jokes.respond(request, function(send, data) { botCallback(send, data, this.res)});
+    //I should to do this in an array, but whatever.
+    coolBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
+    gifBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
+    yesnoBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
+    diceBot.respond(request, function(send, data) { botCallback(send, data, this.res)});
+    //cleverbot.respond(request, function(send, data) { botCallback(send, data, this.res)});
+    jeopardybot.respond(request, function(send, data) { botCallback(send, data, this.res)});
+    chuck.respond(request, function(send, data) { botCallback(send, data, this.res)});
+    hangman.respond(request, function(send, data) { botCallback(send, data, this.res)});
+    markov.respond(request, function(send, data) { botCallback(send, data, this.res)});
+    ferengi.respond(request, function(send, data) { botCallback(send, data, this.res)});
+    jokes.respond(request, function(send, data) { botCallback(send, data, this.res)});
+  }
 }
 
 function botCallback(sendMessage, messageData, res){
