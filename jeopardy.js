@@ -11,7 +11,7 @@ if (process.env.REDIS_URL) {
 
 exports.respond = function(theRequest, callback){
   client.get('isQuestionOutstanding', function(err, isQuestionOutstanding) {
-    if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('jeopardy')){
+    if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/jeopardy')){
       console.log('jeopardy');
       if (isQuestionOutstanding == 'yes'){
         client.get('currentAnswer', function(er, currentAnswer) {

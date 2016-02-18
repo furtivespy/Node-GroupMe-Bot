@@ -1,7 +1,7 @@
 var Roll = require('roll');
 
 exports.respond = function(theRequest, callback){
-  if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('roll ')){
+  if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/roll ')){
     console.log('Let\'s Roll');
     var roll = new Roll();
     if (roll.validate(theRequest.text.trim().substring(5))){

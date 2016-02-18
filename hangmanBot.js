@@ -17,7 +17,7 @@ exports.respond = function(theRequest, callback){
       if(isPlayingHangman == 'yes'){
         client.get('theHangmanGame', function (err, theHangmanGame){
           var hangingGame = JSON.parse(theHangmanGame);
-          if (theRequest.text.trim().toLowerCase().startsWith('hangman')){
+          if (theRequest.text.trim().toLowerCase().startsWith('/hangman')){
             showGallows(callback, hangingGame);
           } else if (oneLetter.test(theRequest.text.trim().toLowerCase())){
             var aGuess = theRequest.text.trim().toLowerCase();
@@ -54,7 +54,7 @@ exports.respond = function(theRequest, callback){
             }
           }
         });
-      } else if (theRequest.text.trim().toLowerCase().startsWith('hangman')){
+      } else if (theRequest.text.trim().toLowerCase().startsWith('/hangman')){
         var query;
         query = qs.stringify( {hasDictionaryDef: 'false',
                                minCorpusCount: 0,
