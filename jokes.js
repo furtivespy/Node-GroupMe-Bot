@@ -11,9 +11,9 @@ exports.respond = function(theRequest, callback){
       getCat(theRequest, callback);
   } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/advice')){
       getAdvice(theRequest, callback);
-  }
+  } else {
       callback(false);
- }
+  }
 }
 
 function getJoke(theRequest, callback) {
