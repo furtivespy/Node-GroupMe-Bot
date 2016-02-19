@@ -135,13 +135,11 @@ exports.respond = function(theRequest, callback){
    		 theRequest.text.trim().toLowerCase().indexOf("money") >= 0 ||
    		 theRequest.text.trim().toLowerCase().indexOf("profit") >= 0 ||
    		 theRequest.text.trim().toLowerCase().indexOf("discount") >= 0 ||
-   		 theRequest.text.trim().toLowerCase().indexOf("sale") >= 0)){
+   		 theRequest.text.trim().toLowerCase().indexOf("sale") >= 0)) {
    			callback(true,deck.pick(rules));
- 	} else if (theRequest.text && theRequest.text.trim().toLowerCase().indexOf("fish")){
+ 	} else if (theRequest.text && theRequest.text.trim().toLowerCase().indexOf("fish")) {
    			callback(true,deck.pick(fishPuns));
- 	}
+ 	} else {
    		callback(false);
  	}
 }
-
-
