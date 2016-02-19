@@ -44,6 +44,6 @@ function getCat(theRequest, callback) {
 
 function getAdvice(theRequest, callback) {
   request({url: 'http://api.adviceslip.com/advice', json: true }, function(error, response, body) {
-    callback(true, body.slip.advice]);
+    callback(true, body.slip.advice);
   })
 }
