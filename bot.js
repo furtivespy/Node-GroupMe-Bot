@@ -28,7 +28,9 @@ function respond() {
     chuck.respond(request, function(send, data) { botCallback(send, data, this.res)});
     hangman.respond(request, function(send, data) { botCallback(send, data, this.res)});
     markov.respond(request, function(send, data) { botCallback(send, data, this.res)});
-    ferengi.respond(request, function(send, data) { botCallback(send, data, this.res)});
+    if (process.env.NERD_ALERT) {
+      ferengi.respond(request, function(send, data) { botCallback(send, data, this.res)});
+    }
     jokes.respond(request, function(send, data) { botCallback(send, data, this.res)});
   }
 }

@@ -1,7 +1,7 @@
 var redis = require('redis');
 var deck = require('deck'); //for good random selection
 var endWord = '\x03';
-var roboResponseChance = 2; //% chance to randomly talk
+var roboResponseChance = process.env.ROBOT_TALK_PRECENTAGE; //% chance to randomly talk
 var prefix = 'markov';
 var constructedPhrase = [];
 

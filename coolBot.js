@@ -26,14 +26,18 @@ exports.respond = function(theRequest, callback){
               });
   } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('robohelp')){
     callback(true, 'I\'m a robot and I respond to certain messages that start with: \n' +
-                    '"/cool guy" and I make a funny face. \n' +
-                    '"Should I" and I\'ll let you know if you should.\n' +
+                    '"gm [search]" to search gifme for a gif or "g [search]" to search giphy and gifme for a gif.\n' +
+                    '"/cool guy" is a fun face. "/joke" is a fun joke.\n' +
+                    '"/advice" for a small piece of advice. "/cat" for a cat fact. \n' +
+                    '"/slogan {something}" and I\'ll make up a slogan for that something. \n' +
+                    '"/chuck", "/chuck me", or "/chuck {insert name here}" for a Chuck Norris type joke.\n' +
+                    '"/flip {something}" and I\'ll flip that something, but "/unflip" and I\'ll put it back.\n' +
                     '"/roll [dice]" and I\'ll roll some dice for you.\n' +
-                    '"robot" and you can chat with me.\n' +
+                    
                     '"/Jeopardy" for some trivia. use "a-" to try and answer.\n' +
                     '"/Hangman" to start (or check the status of) a game of hangman.\n' +
-                    '"/chuck", "/chuck me", or "/chuck {insert name here}" for a Chuck Norris type joke.\n' +
-                    '"gm [search]" to search gifme for a gif or "g [search]" to search giphy and gifme for a gif.\n' +
+                    '"Should" and I\'ll let you know if you/they/it should.\n' +
+                    'start with "robot" and you can chat with me. or sometimes I\'ll just chime in.\n' +
                     'And of course you found this "robohelp" ' + cool());
 
   } else {
