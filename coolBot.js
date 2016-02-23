@@ -24,7 +24,7 @@ exports.respond = function(theRequest, callback){
     client.get('iJustFlipped', function(anErr, wasFlipped) {
                 callback(true, wasFlipped + "ノ( º _ ºノ)");
               });
-  } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('robohelp')){
+  } else if (theRequest.text && (theRequest.text.trim().toLowerCase().startsWith('robohelp') || theRequest.text.trim().toLowerCase().startsWith('/help'))) {
     callback(true, 'I\'m a robot and I respond to certain messages that start with: \n' +
                     '"gm [search]" to search gifme for a gif or "g [search]" to search giphy and gifme for a gif.\n' +
                     '"/cool guy" is a fun face. "/joke" is a fun joke.\n' +
