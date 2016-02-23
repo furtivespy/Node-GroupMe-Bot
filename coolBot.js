@@ -38,7 +38,7 @@ exports.respond = function(theRequest, callback){
                     '"/Hangman" to start (or check the status of) a game of hangman.\n' +
                     '"Should" and I\'ll let you know if you/they/it should.\n' +
                     'start with "robot" and you can chat with me. or sometimes I\'ll just chime in.\n' +
-                    'And of course you found this "robohelp" ' + cool());
+                    'And of course you found this "robohelp" or "/help" ' + cool());
 
   } else {
     callback(false);

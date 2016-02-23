@@ -10,6 +10,7 @@ var hangman = require('./hangmanBot.js');
 var markov = require('./markov.js');
 var ferengi = require('./ferengi.js');
 var jokes = require('./jokes.js');
+var webScrape = require('./webscrapeBot.js');
 var botID = process.env.BOT_ID;
 
 
@@ -32,6 +33,7 @@ function respond() {
       ferengi.respond(request, function(send, data) { botCallback(send, data, this.res)});
     }
     jokes.respond(request, function(send, data) { botCallback(send, data, this.res)});
+    webScrape.respond(request, function(send, data) { botCallback(send, data, this.res)});
   }
 }
 
