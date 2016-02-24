@@ -22,7 +22,7 @@ exports.respond = function(theRequest, callback){
 	} else {
 		var words = theRequest.text.trim().toLowerCase().replace(/:/g,'').split(/\s+/).filter(function(thisArg){ return (thisArg.length > 0); });
 		var mustRespond = false;
-		if (words[0] == 'robot,' || words[0] == 'robot'){
+		if (words[0] == 'robot,' || words[0] == 'robot' || words[0] == process.env.ROBOT_NAME || words[0] == process.env.ROBOT_NAME + ','){
 			words.shift();
 			mustRespond = true;
 		}
