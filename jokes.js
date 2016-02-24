@@ -60,7 +60,7 @@ function getFortune(theRequest, callback) {
 }
 
 function getRon(theRequest, callback) {
-  request({url: 'http://ron-swanson-quotes.herokuapp.com/v2/quotes' }, function(error, response, body) {
+  request({url: 'http://ron-swanson-quotes.herokuapp.com/v2/quotes', json: true }, function(error, response, body) {
     callback(true, body[0]);
   });
 }
