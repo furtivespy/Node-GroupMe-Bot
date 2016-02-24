@@ -38,7 +38,11 @@ function getDefinition(theRequest, callback){
 	}
 	request({url: url }, function(error, response, body) {
     	$ = cheerio.load(body);
-    	callback(true, $('.word').text() + ": " + $('.meaning').text());
-    	callback(true, $('.example').text());
+	    	if ($('.word').length > 0) {
+	    	callback(true, $('.word')[0].text() + ": " + $('.meaning')[0].text());
+	    	callback(true, $('.example')[0].text());
+    	} else {
+    		callback(true, word + ' is a way to confuse robots.');
+    	}
   	});
 }
