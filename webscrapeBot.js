@@ -7,6 +7,8 @@ exports.respond = function(theRequest, callback){
       getSimpsons(theRequest, callback);
   } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/insult')){
       getInsult(theRequest, callback);
+  } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/define')){
+      getDefinition(theRequest, callback);
   } else {
       callback(false);
   }
@@ -23,5 +25,20 @@ function getInsult(theRequest, callback){
 	request({url: 'http://www.randominsults.net'}, function(error, response, body) {
     	$ = cheerio.load(body);
     	callback(true, theRequest.text.substring(7).trim() + ': ' +  $('i').text());
+  	});
+}
+
+function getDefinition(theRequest, callback){
+	var word = theRequest.text.trim().substring(7).trim()
+	var url;
+	if (word === undefined || word == '') {
+		url = 'http://www.urbandictionary.com/random.php';
+	} else {
+		url = 'http://www.urbandictionary.com/define.php?' + qs.stringify( {term: word});
+	}
+	request({url: url }, function(error, response, body) {
+    	$ = cheerio.load(body);
+    	callback(true, $('.word').text() + ": " + $('.meaning').text());
+    	callback(true, $('.example').text());
   	});
 }

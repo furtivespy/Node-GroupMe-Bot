@@ -11,6 +11,8 @@ exports.respond = function(theRequest, callback){
       getCat(theRequest, callback);
   } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/advice')){
       getAdvice(theRequest, callback);
+  } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/fortune')){
+      getFortune(theRequest, callback);
   } else {
       callback(false);
   }
@@ -45,5 +47,12 @@ function getCat(theRequest, callback) {
 function getAdvice(theRequest, callback) {
   request({url: 'http://api.adviceslip.com/advice', json: true }, function(error, response, body) {
     callback(true, body.slip.advice);
+  })
+}
+
+function getFortune(theRequest, callback) {
+  request({url: 'http://www.fortunefortoday.com/getfortuneonly.php' }, function(error, response, body) {
+    callback(true, body);
+    setTimeout(function() { callback(true, "IN BED!"); }, 1500);
   })
 }

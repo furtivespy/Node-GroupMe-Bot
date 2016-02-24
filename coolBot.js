@@ -27,8 +27,8 @@ exports.respond = function(theRequest, callback){
   } else if (theRequest.text && (theRequest.text.trim().toLowerCase().startsWith('robohelp') || theRequest.text.trim().toLowerCase().startsWith('/help'))) {
     callback(true, 'I\'m a robot and I respond to certain messages that start with: \n' +
                     '"gm [search]" to search gifme for a gif or "g [search]" to search giphy and gifme for a gif.\n' +
-                    '"/cool guy" is a fun face. "/joke" is a fun joke.\n' +
-                    '"/advice" for a small piece of advice. "/cat" for a cat fact. \n' +
+                    '"/cool guy" is a fun face. "/joke" is a fun joke. "/cat" for a cat fact.\n' +
+                    '"/advice" for a small piece of advice. "/fortune" for your fortune cookie fortune. \n' +
                     '"/simpsons" for a Simpsons quote. "/insult {someone}" and I\'ll direct an insult at {someone}. \n' +
                     '"/slogan {something}" and I\'ll make up a slogan for that something. \n' +
                     '"/chuck", "/chuck me", or "/chuck {insert name here}" for a Chuck Norris type joke.\n' +
