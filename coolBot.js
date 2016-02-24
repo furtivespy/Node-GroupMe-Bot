@@ -30,10 +30,11 @@ exports.respond = function(theRequest, callback){
                     '"/cool guy" is a fun face. "/joke" is a fun joke. "/cat" for a cat fact.\n' +
                     '"/advice" for a small piece of advice. "/fortune" for your fortune cookie fortune. \n' +
                     '"/simpsons" for a Simpsons quote. "/insult {someone}" and I\'ll direct an insult at {someone}. \n' +
+                    '"/define {something}" and I\'ll get the Urban definition or just "/define" for a random definition. \n' +
                     '"/slogan {something}" and I\'ll make up a slogan for that something. \n' +
-                    '"/chuck", "/chuck me", or "/chuck {insert name here}" for a Chuck Norris type joke.\n' +
+                    '"/chuck", "/chuck me", or "/chuck {someone}" for a Chuck Norris type joke.\n' +
                     '"/flip {something}" and I\'ll flip that something, but "/unflip" and I\'ll put it back.\n' +
-                    '"/roll [dice]" and I\'ll roll some dice for you.\n' +
+                    '"/roll {dice}" and I\'ll roll some dice for you.\n' +
                     
                     '"/Jeopardy" for some trivia. use "a-" to try and answer.\n' +
                     '"/Hangman" to start (or check the status of) a game of hangman.\n' +
