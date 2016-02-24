@@ -13,6 +13,8 @@ exports.respond = function(theRequest, callback){
       getAdvice(theRequest, callback);
   } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/fortune')){
       getFortune(theRequest, callback);
+  } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/swanson')){
+      getRon(theRequest, callback);
   } else {
       callback(false);
   }
@@ -41,18 +43,24 @@ function getSlogan(theRequest, callback) {
 function getCat(theRequest, callback) {
   request({url: 'http://catfacts-api.appspot.com/api/facts', json: true }, function(error, response, body) {
     callback(true, body.facts[0]);
-  })
+  });
 }
 
 function getAdvice(theRequest, callback) {
   request({url: 'http://api.adviceslip.com/advice', json: true }, function(error, response, body) {
     callback(true, body.slip.advice);
-  })
+  });
 }
 
 function getFortune(theRequest, callback) {
   request({url: 'http://www.fortunefortoday.com/getfortuneonly.php' }, function(error, response, body) {
     callback(true, body);
     setTimeout(function() { callback(true, "IN BED!"); }, 1500);
-  })
+  });
+}
+
+function getRon(theRequest, callback) {
+  request({url: 'http://ron-swanson-quotes.herokuapp.com/v2/quotes' }, function(error, response, body) {
+    callback(true, body[0]);
+  });
 }
