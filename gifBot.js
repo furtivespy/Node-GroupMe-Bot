@@ -27,7 +27,7 @@ function searchGifMe(theRequest, callback, trim) {
   if (now.getHours() > 9 && now.getHours < 18 ){
     NSFW = true;
   }
-  console.log(now.getHours + ' - ' + NSFW);
+  console.log(now.getHours() + ' - ' + NSFW);
   request({url: 'http://api.gifme.io/v1/search?' + qs.stringify( {
             query: theRequest.text.trim().substring(trim),
             limit: 25,
