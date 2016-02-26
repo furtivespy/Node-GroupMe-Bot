@@ -22,11 +22,17 @@ function searchGiphy(theRequest, callback) {
 }
 
 function searchGifMe(theRequest, callback, trim) {
+  var NSFW = false;
+  var now = new Date();
+  if (now.getHours() > 9 && now.getHours < 18 ){
+    NSFW = true;
+  }
+  console.log(now.getHours + ' - ' + NSFW);
   request({url: 'http://api.gifme.io/v1/search?' + qs.stringify( {
             query: theRequest.text.trim().substring(trim),
             limit: 25,
             page: 0,
-            sfw: false,
+            sfw: NSFW,
             key: process.env.GIFME_KEY }),
           json: true },
           function(error, response, body) {
