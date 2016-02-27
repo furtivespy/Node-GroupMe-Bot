@@ -11,6 +11,8 @@ exports.respond = function(theRequest, callback){
       getDefinition(theRequest, callback);
   } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/friends')){
       getFriends(theRequest, callback);
+  } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/mst')){
+      getMst3k(theRequest, callback);
   } else {
       callback(false);
   }
@@ -51,6 +53,18 @@ function getDefinition(theRequest, callback){
 
 function getFriends(theRequest, callback){
 	request({url: 'https://en.wikiquote.org/wiki/Friends_(TV_series)'}, function(error, response, body) {
+    	$ = cheerio.load(body);
+    	var ranItem = Math.floor( (Math.random() * $('dl').length) + 1 );
+    	var quote = '';
+    	$('dl:nth-child(' + ranItem + ')').children('dd').each(function(i,elem){
+    		quote = quote +  $(this).text().replace(/<.*?>/g,'') + '\n';
+    	});
+    	callback(true, quote);
+  	});
+}
+
+function getMst3k(theRequest, callback){
+	request({url: 'https://en.wikiquote.org/wiki/Mystery_Science_Theater_3000'}, function(error, response, body) {
     	$ = cheerio.load(body);
     	var ranItem = Math.floor( (Math.random() * $('dl').length) + 1 );
     	var quote = '';
