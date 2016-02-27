@@ -36,10 +36,7 @@ exports.respond = function(theRequest, callback){
                     '"/chuck", "/chuck me", or "/chuck {someone}" for a Chuck Norris type joke.\n' +
                     '"/flip {something}" and I\'ll flip that something, but "/unflip" and I\'ll put it back.\n' +
                     '"/roll {dice}" and I\'ll roll some dice for you.\n' +
-                    
-                    '"/Jeopardy" for some trivia. use "a-" to try and answer.\n' +
-                    '"/Hangman" to start (or check the status of) a game of hangman.\n' +
-                    '"Should" and I\'ll let you know if you/they/it should.\n' +
+                    'Try a game of "/Jeopardy" (use "a-" to answer) or "/Hangman".\n' +
                     'start with "robot" and you can chat with me. or sometimes I\'ll just chime in.\n' +
                     'And of course you found this "robohelp" or "/help" ' + cool());
 
