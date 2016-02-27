@@ -28,7 +28,7 @@ exports.respond = function(theRequest, callback){
     callback(true, 'I\'m a robot and I respond to certain messages that start with: \n' +
                     '"g {search}" or "gm {search}" for a gif. (gm has a tendancy to be a little more dirty (after 6pm)) .\n' +
                     '"/cool guy" - face. "/joke" - fun joke. "/cat" - cat fact. "/advice" - advice. "/fortune" - fortune cookie. \n' +
-                    '"/simpsons" - Simpsons quote. "/swanson" - Ron Swanson quote. and "/help" for this help! \n' +
+                    '"/simpsons" - Simpsons quote. "/swanson" - Ron Swanson quote. "/friends" for Friends quote. and "/help" for this help! \n' +
                     '"/insult {someone}" and I\'ll direct an insult at {someone}. \n' +
                     '"/define {something}" and I\'ll get the Urban definition or just "/define" for a random definition. \n' +
                     '"/slogan {something}" and I\'ll make up a slogan for that something. \n' +

@@ -54,7 +54,6 @@ function getFriends(theRequest, callback){
     	$ = cheerio.load(body);
     	var ranItem = Math.floor( (Math.random() * $('dl').length) + 1 );
     	var quote = '';
-    	console.log($('dl:nth-child(' + ranItem + ')').text());
     	$('dl:nth-child(' + ranItem + ')').children('dd').each(function(i,elem){
     		quote = quote +  $(this).text().replace(/<.*?>/g,'') + '\n';
     	});
