@@ -24,7 +24,7 @@ function searchGiphy(theRequest, callback) {
 function searchGifMe(theRequest, callback, trim) {
   var NSFW = 'false';
   var now = new Date();
-  if ( now.getDay() > 0 && now.getDay() < 7 &&
+  if ( now.getDay() > 0 && now.getDay() < 6 &&
        now.getHours() > 14 && now.getHours() < 23 ){
     NSFW = 'true';
   }
