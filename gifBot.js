@@ -24,7 +24,8 @@ function searchGiphy(theRequest, callback) {
 function searchGifMe(theRequest, callback, trim) {
   var NSFW = 'false';
   var now = new Date();
-  if (now.getHours() > 14 && now.getHours() < 23 ){
+  if ( now.getDay() > 0 && now.getDay() < 7 &&
+       now.getHours() > 14 && now.getHours() < 23 ){
     NSFW = 'true';
   }
   request({url: 'http://api.gifme.io/v1/search?' + qs.stringify( {
