@@ -56,8 +56,6 @@ function getFriends(theRequest, callback){
     	var quote = '';
     	console.log($('dl:nth-child(' + ranItem + ')').text());
     	$('dl:nth-child(' + ranItem + ')').children('dd').each(function(i,elem){
-    		console.log($(this).text());
-    		console.log(elem);
     		quote = quote +  $(this).text().replace(/<.*?>/g,'') + '\n';
     	});
     	callback(true, quote);
