@@ -15,6 +15,8 @@ exports.respond = function(theRequest, callback){
       getFriends(theRequest, callback);
   } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/mst')){
       getMst3k(theRequest, callback);
+  } else if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/tng')){
+      getTNG(theRequest, callback);
   } else {
       callback(false);
   }
@@ -74,6 +76,19 @@ function getMst3k(theRequest, callback){
 		} else {
 			request({url: 'https://en.wikiquote.org/wiki/Mystery_Science_Theater_3000'}, function(error, response, body) {
 				myCache.set("MSTQuotes",body);
+		    	RandoWikiquote(body, callback);
+		  	});
+		}
+	});
+}
+
+function getTNG(theRequest, callback){
+	myCache.get("TrekQuotes", function(err,value){
+		if (!err && value != undefined){
+			RandoWikiquote(value, callback);
+		} else {
+			request({url: 'https://en.wikiquote.org/wiki/Star_Trek:_The_Next_Generation'}, function(error, response, body) {
+				myCache.set("TrekQuotes",body);
 		    	RandoWikiquote(body, callback);
 		  	});
 		}
