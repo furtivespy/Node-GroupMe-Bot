@@ -1,6 +1,8 @@
 var request = require('request');
 var qs = require( 'querystring' );
 var cheerio = require('cheerio');
+var nodeCache = require('node-cache');
+var myCache = new nodeCache( { stdTTL: 300, checkperiod: 600 } );
 
 exports.respond = function(theRequest, callback){
   if (theRequest.text && theRequest.text.trim().toLowerCase().startsWith('/simpsons')){
@@ -52,15 +54,30 @@ function getDefinition(theRequest, callback){
 }
 
 function getFriends(theRequest, callback){
-	request({url: 'https://en.wikiquote.org/wiki/Friends_(TV_series)'}, function(error, response, body) {
-    	RandoWikiquote(body, callback);
-  	});
+	myCache.get("FriendsQuotes", function(err,value){
+		if (!err && value != undefined){
+			RandoWikiquote(value, callback);
+		} else {
+			request({url: 'https://en.wikiquote.org/wiki/Friends_(TV_series)'}, function(error, response, body) {
+				myCache.set("FriendsQuotes",body);
+		    	RandoWikiquote(body, callback);
+		  	});
+		}
+	});
 }
+	
 
 function getMst3k(theRequest, callback){
-	request({url: 'https://en.wikiquote.org/wiki/Mystery_Science_Theater_3000'}, function(error, response, body) {
-    	RandoWikiquote(body, callback);
-  	});
+	myCache.get("MSTQuotes", function(err,value){
+		if (!err && value != undefined){
+			RandoWikiquote(value, callback);
+		} else {
+			request({url: 'https://en.wikiquote.org/wiki/Mystery_Science_Theater_3000'}, function(error, response, body) {
+				myCache.set("MSTQuotes",body);
+		    	RandoWikiquote(body, callback);
+		  	});
+		}
+	});
 }
 
 function RandoWikiquote(pageBody, callback){
@@ -74,7 +91,7 @@ function RandoWikiquote(pageBody, callback){
     			quote = '';
     		}
     	});
-		if (quote != '') {
-	    	callback(true, quote);
-	    }
+	if (quote != '') {
+    	callback(true, quote);
+    }    
 }
